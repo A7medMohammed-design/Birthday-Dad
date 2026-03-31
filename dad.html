@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Update | My Birthday</title>
+    <style>
+        body {
+   
+            background-image: url('Bi.jpg'); 
+            background-size: cover; 
+            background-position: center; 
+            background-repeat: no-repeat; 
+            background-attachment: fixed; 
+
+            /* تغيير لون الخط والخطوط */
+            color: #1577ff; /* أبيض مائل للزرقة */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            font-size:25px; /* حجم مناسب للقراءة */
+            line-height: 1.8;
+            font-weight: bold; 
+            /* دعم اللغة العربية من اليمين */
+            direction: rtl; 
+            text-align: right;
+        }
+
+        #console { 
+            max-width: 800px; 
+            z-index: 1; 
+             شفافة سودة عشان الكلام يظهر فوق الصورة */
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .line {
+            margin-bottom: 15px;
+            white-space: pre-wrap; /* يحافظ على المسافات والأسطر */
+        }
+
+        /* تنسيق خاص للسطر الإنجليزي */
+        .english-text {
+            direction: ltr;
+            text-align: left;
+            display: block;
+            color: #ff001f; /* لون أزرق مميز للإنجليزي */
+            margin-top: 20px;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 25px;
+            background-color: #58a6ff;
+            animation: blink 1s infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="console"></div>
+
+<script>
+    // استخدمنا الـ Backticks (`) عشان نقدر نكتب نص طويل بأسطر متعددة
+    const lines = [
+        `كل سنة وأنت طيب يا بابا الغالي 🎂❤️
+مش عارف أقولك إيه ولا إيه، بس بجد أنت أكبر نعمة في حياتي، وأكتر حد بتعلم منه كل يوم. شكراً على تعبك معانا، وعلى إنك دايمًا بتقف جنبنا وبتدعمنا مهما حصل. وجودك في حياتي أمان كبير، وكفاية بس إني بقول بابا وأنا مطمن. 
+ربنا يخليك لينا ويديك الصحة وطول العمر، ويبارك في عمرك، وتفضل دايمًا منور حياتنا وضهر وسند لينا.
+وإن شاء الله أقدر أفرحك وأحققلك كل اللي تتمناه .`,
+        `"Happy Birthday Dad 🎂🎉🫀❤❤ "`
+    ];
+
+    const consoleElement = document.getElementById('console');
+    let lineIndex = 0;
+
+    function typeLine() {
+        if (lineIndex < lines.length) {
+            let line = document.createElement('div');
+            line.className = 'line';
+            
+            // لو السطر هو التاني (الإنجليزي) نغير اتجاهه
+            if (lineIndex === 1) {
+                line.classList.add('english-text');
+            }
+            
+            consoleElement.appendChild(line);
+            
+            let charIndex = 0;
+            let currentLineText = lines[lineIndex];
+            
+            function typeChar() {
+                if (charIndex < currentLineText.length) {
+                    line.textContent += currentLineText[charIndex];
+                    charIndex++;
+                    setTimeout(typeChar, 40);
+                } else {
+                    lineIndex++;
+                    setTimeout(typeLine, 700);
+                }
+            }
+            typeChar();
+        } else {
+            let cursor = document.createElement('span');
+            cursor.className = 'cursor';
+            consoleElement.appendChild(cursor);
+        }
+    }
+    
+    // بدء التأثير بعد ثانية واحدة
+    setTimeout(typeLine, 1000);
+</script>
+
+</body>
+</html>
